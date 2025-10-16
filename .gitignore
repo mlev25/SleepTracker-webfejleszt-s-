@@ -1,0 +1,59 @@
+# --------------------------------------------------------------------------
+# 1. Függőségek és Build kimenetek (Node.js & Vue)
+# --------------------------------------------------------------------------
+/node_modules
+/server/node_modules
+/dist
+/build
+/out
+
+# Tipp: Ha a Vue projektben használsz '.env' fájlokat a környezeti változókhoz,
+# ezeket is érdemes ignorálni a biztonság kedvéért!
+.env
+.env.local
+.env.*.local
+.DS_Store
+
+# --------------------------------------------------------------------------
+# 2. Naplók és Munkaterület-fájlok
+# --------------------------------------------------------------------------
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# Általános log fájlok
+*.log
+*.tmp
+*.bak
+/temp
+
+# --------------------------------------------------------------------------
+# 3. Backend (Node.js) specifikus
+# --------------------------------------------------------------------------
+# Futtatás közbeni adatok és cache
+/coverage
+/public/uploads 
+# A feltöltött fájlok általában nagyok és folyton változnak.
+
+# --------------------------------------------------------------------------
+# 4. Frontend (Vue) specifikus
+# --------------------------------------------------------------------------
+# Helyi cache és beállítások
+.vuepress/cache
+.nuxt/ # Ha Nuxt.js-t használsz (Vue alapú keretrendszer)
+
+# --------------------------------------------------------------------------
+# 5. IDE és OS fájlok (Opcionális, de ajánlott)
+# --------------------------------------------------------------------------
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+
+# Visual Studio Code (ha ezt használod)
+.vscode/
+# De ha a munkatársaknak is szükségük van a beállításokra (pl. futtatási konfig), akkor:
+#.vscode/settings.json
+#.vscode/tasks.json
+#.vscode/launch.json
+# ... kivéve a helyi munkaterület beállításokat:
+.vscode/*.local
