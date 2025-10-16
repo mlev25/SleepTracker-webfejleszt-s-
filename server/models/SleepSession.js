@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const SleepEventSchema = new new mongoose.Schema({
+const SleepEventSchema = new mongoose.Schema({
     eventType: {
         type: String,
         enum: ['LIGHT', 'DEEP', 'REM', 'WAKE'],
@@ -42,6 +42,11 @@ const SleepSessionSchema = new mongoose.Schema({
     wasInterrupted: {
         type: Boolean,
         default: false
+    },
+    totalSleepMinutes: {
+        type: Number,
+        required: false,
+        default: 0
     },
     sleepEvents: [SleepEventSchema] // Beágyazás
 }, { timestamps: true });

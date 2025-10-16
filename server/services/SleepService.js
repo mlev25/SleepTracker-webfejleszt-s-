@@ -40,7 +40,7 @@ const generateSleepEvents = (totalMinutes, quality, wasInterrupted) => {
 
     // --- Fázisok Generálása (Szimuláció) ---
     let timeElapsed = 0;
-    const PHASE_ORDER = ['LIGHT', 'DEEP', 'REM', 'LIGHT', 'WAKE']; 
+    const PHASE_ORDER = ['LIGHT', 'DEEP', 'REM', 'WAKE']; 
     
     // Generálunk egy ciklust
     for (const phase of PHASE_ORDER) {

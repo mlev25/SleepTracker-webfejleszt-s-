@@ -1,11 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 dotenv.config();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
+
+//Import routes
+const authRoutes = require('./routes/authRoutes');
+const sleepRoutes = require('./routes/sleepRoutes');
 
 const connectDB = async () => {
     try {
@@ -22,6 +28,10 @@ const connectDB = async () => {
 
 connectDB();
 
+//connect routes
+app.use('/api/auth', authRoutes);
+app.use('/api/sleepsessions', sleepRoutes);
+
 app.get('/', (req, res) => {
     res.send('API is running...');
 });
@@ -31,6 +41,3 @@ const PORT = process.env.Port || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port  http://localhost:${PORT}`);
 });
-//const cors = require('cors');
-//const authRoutes = require('./routes/auth');
-//const sleepRoutes = require('./routes/sleep');
