@@ -47,7 +47,7 @@ router.post('/', protect, async (req, res) => {
             const savedSession = await newSleepSession.save();
             res.status(201).json(savedSession);
       }catch(error){
-            res.status(500).json({message: 'Server side error'});
+            res.status(500).json({message: 'Server side error ' + error.message});
       }
 });
 

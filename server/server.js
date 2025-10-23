@@ -28,6 +28,13 @@ const connectDB = async () => {
 
 connectDB();
 
+mongoose.set('strictQuery', true);
+mongoose.connection.on('connected', () => {
+    mongoose.model('SleepSession').createIndexes() 
+        .then(() => console.log('MongoDB: SleepSession indexek frissítve.'))
+        .catch(err => console.error('MongoDB Index Hiba:', err.message));
+});
+
 //connect routes
 app.use('/api/auth', authRoutes);
 app.use('/api/sleepsessions', sleepRoutes);

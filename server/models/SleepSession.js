@@ -51,4 +51,7 @@ const SleepSessionSchema = new mongoose.Schema({
     sleepEvents: [SleepEventSchema] // Beágyazás
 }, { timestamps: true });
 
-module.exports = mongoose.model('SleepSession', SleepSessionSchema);
+SleepSessionSchema.index({ user: 1, bedtime: 1 }, { unique: true });
+const SleepSession = mongoose.model('SleepSession', SleepSessionSchema);
+
+module.exports = SleepSession;
