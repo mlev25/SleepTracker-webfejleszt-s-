@@ -142,4 +142,13 @@ button:disabled {
 .auth-link a:hover {
     text-decoration: underline;
 }
+@media (max-width: 480px) {
+    .login-container {
+        max-width: 100%; /* Kitölti a teljes szélességet */
+        margin: 20px 10px; /* Kisebb margó oldalt */
+        padding: 20px;
+        box-shadow: none; /* Mobilon nem kellenek árnyékok */
+        border-radius: 0;
+    }
+}
 </style>

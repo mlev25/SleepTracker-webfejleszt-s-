@@ -1,7 +1,7 @@
 <template>
   <footer class="app-footer">
     <p>&copy; 2025 Alvásnapló - Minden jog fenntartva.</p>
-    <p>Fejlesztette: Pinia & Vue 3</p>
+    <p class="dev">Fejlesztette: <b><a href="https://github.com/mlev25">mlev25</a></b> </p>
   </footer>
 </template>
 
@@ -23,5 +23,13 @@
 }
 .app-footer p {
   margin: 5px 0;
+}
+
+.dev a {
+  color: #f5df60;
+  text-decoration: none;
+}
+.dev a:hover {
+  color: aqua;
 }
 </style>
