@@ -6,6 +6,11 @@
 
     <form @submit.prevent="handleRegister">
       <div>
+        <label for="name">Név</label>
+        <input type="text" id="name" v-model="name" required>
+      </div>
+
+      <div>
         <label for="email">E-mail cím</label>
         <input type="email" id="email" v-model="email" required>
       </div>
@@ -37,6 +42,7 @@ const router = useRouter();
 // 1. REAKTÍV ÁLLAPOTOK
 const email = ref('');
 const password = ref('');
+const name = ref('');
 const isLoading = ref(false);
 const error = ref(null);
 
@@ -51,6 +57,7 @@ const handleRegister = async () => {
     const userData = {
       email: email.value,
       password: password.value,
+      name: name.value,
     };
 
     // 2. ASZINKRON API HÍVÁS (register helyett login)

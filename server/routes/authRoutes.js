@@ -8,7 +8,7 @@ const generateToken = require('../utils/generateToken'); // Importáljuk a JWT g
 // @desc    Új felhasználó regisztrálása
 // @access  Public
 router.post('/register', async (req, res) => {
-    const { email, password, role } = req.body;
+    const { name, email, password, role } = req.body;
 
     try {
         // 1. Ellenőrzés: Létezik-e már felhasználó ezzel az e-mail címmel?
@@ -19,6 +19,7 @@ router.post('/register', async (req, res) => {
 
         // 2. Felhasználó példányosítása
         user = new User({
+            name,
             email,
             password, // Ezt a jelszót hasheljük a 3. lépésben
             role: role || 'USER'
@@ -34,6 +35,7 @@ router.post('/register', async (req, res) => {
         // 5. JWT generálása és visszaküldése
         res.status(201).json({
             _id: user._id,
+            name: user.name,
             email: user.email,
             role: user.role,
             token: generateToken(user._id),
@@ -60,6 +62,7 @@ router.post('/login', async (req, res) => {
             // 2. Sikeres összehasonlítás, JWT generálása
             res.json({
                 _id: user._id,
+                name: user.name,
                 email: user.email,
                 role: user.role,
                 token: generateToken(user._id),

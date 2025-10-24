@@ -3,7 +3,7 @@
     <h1>Alvásnapló Dashboard</h1>
 
     <div class="user-info">
-      <p>Üdvözöljük, {{ authStore.getUserEmail }}!</p>
+      <p>Üdvözöljük, {{ authStore.getUserName }}!</p>
       <p>Felhasználó ID: <code>{{ authStore.getUserId }}</code></p>
     </div>
 

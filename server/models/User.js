@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: [true, 'Kérjük, adja meg a nevét'],
+        maxlength: 50,
+        trim: true
+    },
     email: {
         type: String,
         required: [true, 'Kérjük, adja meg az e-mail címét'],

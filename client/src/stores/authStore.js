@@ -13,7 +13,8 @@ export const useAuthStore = defineStore('authStore', {
         const user = {
             _id: payload._id,
             email: payload.email,
-            role: payload.role
+            role: payload.role,
+            name: payload.name
         };
         const token = payload.token;
 
@@ -39,6 +40,7 @@ export const useAuthStore = defineStore('authStore', {
   getters: {
     isAuthenticated: (state) => state.isLoggedIn,
     getUserId: (state) => state.user?._id || null,
+    getUserName: (state) => state.user?.name || 'Vendég',
     getUserEmail: (state) => state.user?.email || null,
     getUser: (state) => state.user,
   }

@@ -9,7 +9,7 @@
       </template>
 
       <template v-else>
-        <span class="welcome-message">Üdv, {{ authStore.getUserEmail }}</span>
+        <span class="welcome-message">Üdv, {{ authStore.getUserName }}</span>
         <button @click="handleLogout" class="nav-item logout-btn">Kijelentkezés</button>
       </template>
     </div>
