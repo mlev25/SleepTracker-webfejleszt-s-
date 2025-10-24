@@ -8,23 +8,32 @@ export const useAuthStore = defineStore('authStore', {
   }),
 
   actions: {
-    setAuth({ user, token }) {
-            this.user = user;
-            this.token = token;
-            this.isLoggedIn = true;
+    setAuth(payload) {
+        // 2. Szétválasztjuk a user adatokat a tokentől a mentéshez
+        const user = {
+            _id: payload._id,
+            email: payload.email,
+            role: payload.role
+        };
+        const token = payload.token;
 
-            localStorage.setItem('user', JSON.stringify(user));
-            localStorage.setItem('token', token);
-        },
+        // 3. Mentés a Store-ba és a Local Storage-ba
+        this.user = user;
+        this.token = token;
+        this.isLoggedIn = true;
 
-        logout() {
-            this.user = null;
-            this.token = null;
-            this.isLoggedIn = false;
+        localStorage.setItem('user', JSON.stringify(user)); // Itt már a tiszta user objektumot mentjük
+        localStorage.setItem('token', token);
+    },
 
-            localStorage.removeItem('user');
-            localStorage.removeItem('token');
-        }
+    logout() {
+        this.user = null;
+        this.token = null;
+        this.isLoggedIn = false;
+
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+    }
   },
 
   getters: {
