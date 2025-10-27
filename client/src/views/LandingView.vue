@@ -7,20 +7,20 @@
 
       <div class="feature-box">
         <i class="icon">📈</i>
-        <h3>Mutatós Diagramok</h3>
-        <p>Lásd a trendeket! Kövesd nyomon alvásod minőségét, időtartamát és mélységét könnyen értelmezhető grafikonokon.</p>
+        <h3>Könnyed Felhasználás</h3>
+        <p>Lásd a trendeket! Kövesd nyomon alvásod minőségét, mélységét egyszerűen, érthetően.</p>
       </div>
 
       <div class="feature-box">
         <i class="icon">📊</i>
-        <h3>Hasznos Statisztikák</h3>
-        <p>Elemezz! Hozzáférhetsz heti és havi átlagokhoz, hogy jobban megértsd a pihenési mintáidat.</p>
+        <h3>Hasznos Diagramok</h3>
+        <p>Elemezz! Hozzáférhetsz hasznos diagramokhoz, hogy jobban megértsd a pihenési mintáidat.</p>
       </div>
 
       <div class="feature-box">
         <i class="icon">🎯</i>
         <h3>Célok Kitűzése</h3>
-        <p>Tűzz ki személyes alvási célokat, és kövesd, mennyire sikerül tartani a kitűzött ritmust.</p>
+        <p>Rendszerezz! Tűzz ki személyes alvási célokat, és kövesd, mennyire sikerül tartani a kitűzött ritmust.</p>
       </div>
 
     </div>
@@ -70,11 +70,11 @@ h1 {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     text-align: center;
     border-top: 5px solid #007bff; /* Kiemelő vonal felül */
-    transition: transform 0.3s;
+    transition: transform 0.5s;
 }
 
 .feature-box:hover {
-    transform: translateY(-5px); /* Enyhe lebegő hatás */
+    transform: translateY(-10px); /* Enyhe lebegő hatás */
 }
 
 .icon {
@@ -122,9 +122,16 @@ h1 {
 .cta-link {
     display: inline-block;
     color: #007bff;
+    font-weight: bold;
     text-decoration: none;
     margin: 10px;
-    padding: 15px 0;
+    padding: 10px 15px;
+    border-radius: 0.5rem;
+}
+
+.cta-link:hover {
+    color: #0056b3;
+    background-color: #99bddb;
 }
 
 @media (max-width: 900px) {
