@@ -6,7 +6,7 @@
       <StatCard title="Beállított cél:&nbsp" :value="authStore.getPrefSleepTime" />
       <StatCard title="Átlagos alvásminőség:&nbsp" :value="authStore.getUserName" />
 
-      <StatCard value="Új alvás felvitele" action @click="openCreateModal"></StatCard>
+      <StatCard title="" value="Új alvás felvitele" action @click="openCreateModal"></StatCard>
     </section>
 
     <section class="main-content-grid">
@@ -186,7 +186,7 @@ h2 {
 }
 
 .main-list-area {
-    background-color: white;
+    background-color: wheat;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -204,7 +204,7 @@ h2 {
 }
 
 /* Reszponzivitás a fő tartalomra */
-@media (max-width: 900px) {
+@media (max-width: 1150px) {
     .main-content-grid {
         grid-template-columns: 1fr; /* Egymás alá kerülnek az oszlopok */
     }

@@ -14,8 +14,8 @@
                 @click="showDetails(record)">
                 <div class="item-date">📅 {{ formatDate(record.date) }}</div>
                 <div class="item-details">
-                    <span class="item-duration">Időtartam: {{ convertMinutesToHours(record.totalSleepMinutes) }}</span>
-                    <span class="item-quality">Alvás minősége: {{ record.sleepQuality }}/5 ⭐</span>
+                    <span class="item-duration">Idő: {{ convertMinutesToHours(record.totalSleepMinutes) }}</span>
+                    <span class="item-quality">Minőség: {{ record.sleepQuality }}/5⭐</span>
                 </div>
                 <div class="item-actions">
                     <span class="edit-icon">Részletek</span>
@@ -66,6 +66,7 @@ const showDetails = (record) => {
     height: 100%;
     display: flex;
     flex-direction: column;
+    font-size: 1.1rem;
 }
 
 .add-record-btn {
@@ -107,9 +108,10 @@ const showDetails = (record) => {
     justify-content: space-between;
     align-items: center;
     padding: 12px 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 3px solid #ebca39;
     cursor: pointer;
     transition: background-color 0.2s;
+    border-radius: 10px;
 }
 
 .list-item:last-child {
@@ -117,7 +119,7 @@ const showDetails = (record) => {
 }
 
 .list-item:hover {
-    background-color: #f8f8f8;
+    background-color: #c4ffe9;
 }
 
 .item-date {
@@ -147,4 +149,24 @@ const showDetails = (record) => {
     padding: 30px 10px;
     color: #999;
 }
+
+
+@media (max-width: 1450px){
+    .list-wrapper{
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 1370px){
+    .list-wrapper{
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 450px){
+    .list-wrapper{
+        font-size: 0.7rem;
+    }
+}
+
 </style>
