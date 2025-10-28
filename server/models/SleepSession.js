@@ -13,14 +13,14 @@ const SleepEventSchema = new mongoose.Schema({
     startTime: {
         type: Date
     }
-}, { _id: false }); // Eseményeknek nem kell saját _id
+}, { _id: false }); // nem kell sajat id az esemenyekhez
 
-// Alvás Munkamenet fő sémája (1 oldal)
+// alvasnaplo fo sema
 const SleepSessionSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true // Ez a kulcs a 4-es szintű jogosultsághoz!
+        required: true
     },
     date: {
         type: Date,
@@ -48,10 +48,10 @@ const SleepSessionSchema = new mongoose.Schema({
         required: false,
         default: 0
     },
-    sleepEvents: [SleepEventSchema] // Beágyazás
+    sleepEvents: [SleepEventSchema] //beagyazzuk az esemeny semat
 }, { timestamps: true });
 
-SleepSessionSchema.index({ user: 1, bedtime: 1 }, { unique: true });
+SleepSessionSchema.index({ user: 1, date: 1 }, { unique: true });
 const SleepSession = mongoose.model('SleepSession', SleepSessionSchema);
 
 module.exports = SleepSession;

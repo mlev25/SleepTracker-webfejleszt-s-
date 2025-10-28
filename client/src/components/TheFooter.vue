@@ -12,7 +12,7 @@
 <style scoped>
 .app-footer {
   text-align: center;
-  padding: 20px;
+  padding: 5px;
   background-color: #334d6e; /* Ugyanaz a szín, mint a header */
   color: #c4d2e5;
   position: fixed; /* Rögzítés az oldal aljára */

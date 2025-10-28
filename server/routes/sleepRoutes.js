@@ -25,7 +25,7 @@ router.get('/', protect, async (req, res) => {
 // @desc  Uj alvasadat felvetele
 // @access Private
 router.post('/', protect, async (req, res) => {
-      const {bedtime, wakeupTime, sleepQuality, wasInterrupted} = req.body;
+      const {date, bedtime, wakeupTime, sleepQuality, wasInterrupted} = req.body;
 
       const totalMinutes = Math.round((new Date(wakeupTime) - new Date(bedtime)) / (1000 * 60));
 
@@ -38,7 +38,7 @@ router.post('/', protect, async (req, res) => {
       try{
             const newSleepSession = new SleepSession({
                   ...req.body,
-                  date: new Date(bedtime),
+                  date: new Date(date),
                   totalSleepMinutes: totalMinutes,
                   user: req.user._id,
                   sleepEvents: sleepEvents
@@ -104,7 +104,7 @@ router.put('/:id', protect, async (req, res) => {
                   if (totalMinutes > 0) {
                   sleepEvents = generateSleepEvents(totalMinutes, sleepQuality, wasInterrupted);
                   }
-                  
+
                   updatedFields.sleepEvents = sleepEvents;
             }
 

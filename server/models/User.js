@@ -30,6 +30,11 @@ const userSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    preferredSleepTime: {
+        type: String,
+        default: 8,
+        required: true
     }
 });
 

@@ -20,6 +20,11 @@
         <input type="password" id="password" v-model="password" required>
       </div>
 
+      <div>
+        <label for="prefSleepTime">Alvási cél (óra:perc)</label>
+        <input type="text" id="prefSleepTime" v-model="prefSleepTime" required>
+      </div>
+
       <button type="submit" :disabled="isLoading">
         {{ isLoading ? 'Regisztráció...' : 'Regisztráció' }}
       </button>
@@ -43,8 +48,11 @@ const router = useRouter();
 const email = ref('');
 const password = ref('');
 const name = ref('');
+const prefSleepTime = ref('');
+
 const isLoading = ref(false);
 const error = ref(null);
+
 
 /**
  * Kezeli a regisztrációs kérést a backend felé
@@ -58,6 +66,7 @@ const handleRegister = async () => {
       email: email.value,
       password: password.value,
       name: name.value,
+      preferredSleepTime: prefSleepTime.value
     };
 
     // 2. ASZINKRON API HÍVÁS (register helyett login)
