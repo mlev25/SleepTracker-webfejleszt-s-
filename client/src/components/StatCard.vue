@@ -1,5 +1,5 @@
 <template>
-    <div class="stat-card">
+    <div :class="['stat-card', { 'is-action': action }]" @click="action ? $emit('click') : null">
         <div class="card-content">
             <p class="card-title">{{ title }}</p>
             <p class="card-val">{{ value }}</p>
@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import {defineEmits, defineProps } from 'vue';
 
 defineProps({
     title: {
@@ -18,8 +18,14 @@ defineProps({
     value: {
         type: [String, Number],
         required: true
+    },
+    action: {
+        type: Boolean,
+        default: false
     }
-})
+});
+
+defineEmits(['click']);
 </script>
 
 <style scoped>
@@ -49,4 +55,18 @@ defineProps({
     color: #334d6e;
     font-weight: bold;
 }
+
+.stat-card.is-action {
+    cursor: pointer;
+    background-color: #d8f5d8; /* Más szín, hogy kitűnjön */
+    border-left: 5px solid #28a745; /* Zöld akció jelzés */
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.stat-card.is-action:hover {
+    background-color: #c9e6c9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 </style>

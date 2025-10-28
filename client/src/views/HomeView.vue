@@ -5,6 +5,8 @@
       <StatCard title="Átlagos alvásidő:&nbsp" :value="authStore.getUserName" />
       <StatCard title="Beállított cél:&nbsp" :value="authStore.getPrefSleepTime" />
       <StatCard title="Átlagos alvásminőség:&nbsp" :value="authStore.getUserName" />
+
+      <StatCard value="Új alvás felvitele" action @click="openCreateModal"></StatCard>
     </section>
 
     <section class="main-content-grid">
@@ -18,6 +20,13 @@
             <SleepList :records="sleepRecords" @editRecord="openEditModal"></SleepList>
         </div>
     </section>
+
+    <SleepModal
+      :isOpen="isModalOpen"
+      :selectedRecord="selectedRecord"
+      @close="isModalOpen = false"
+      @recordSaved="handleRecordSaved"
+    />
   </div>
 </template>
 
@@ -27,12 +36,15 @@ import SleepList from '@/components/SleepList.vue';
 import StatCard from '@/components/StatCard.vue';
 import { useAuthStore } from '@/stores/authStore';
 import sleepService from '@/services/sleepService';
+import SleepModal from '@/components/SleepModal.vue';
 
 
 // A Pinia Store példányosítása
 const authStore = useAuthStore();
 const sleepRecords = ref([]);
 const loading = ref(true);
+const isModalOpen = ref(false);
+const selectedRecord = ref(null);
 
 const loadRecords = async () => {
     loading.value = true;
@@ -47,6 +59,15 @@ const loadRecords = async () => {
     } finally {
         loading.value = false;
     }
+}
+
+const openCreateModal = () => {
+    selectedRecord.value = null;
+    isModalOpen.value = true;
+}
+
+const handleRecordSaved = () => {
+    loadRecords();
 }
 
 const openEditModal = (record) => {
