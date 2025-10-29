@@ -2,9 +2,9 @@
   <div class="dashboard-container">
 
     <section class="stat-cards-grid">
-      <StatCard title="Átlagos alvásidő:&nbsp" :value="authStore.getUserName" />
+      <StatCard title="Átlagos alvásidő:&nbsp" :value="sleepService.calculateAverageSleepTime(sleepRecords)" />
       <StatCard title="Beállított cél:&nbsp" :value="authStore.getPrefSleepTime" />
-      <StatCard title="Átlagos alvásminőség:&nbsp" :value="authStore.getUserName" />
+      <StatCard title="Átlagos alvásminőség:&nbsp" :value="sleepService.calculateAverageSleepQuality(sleepRecords)" />
 
       <StatCard title="" value="Új alvás felvitele" action @click="openCreateModal"></StatCard>
     </section>
@@ -38,8 +38,6 @@ import { useAuthStore } from '@/stores/authStore';
 import sleepService from '@/services/sleepService';
 import SleepModal from '@/components/SleepModal.vue';
 
-
-// A Pinia Store példányosítása
 const authStore = useAuthStore();
 const sleepRecords = ref([]);
 const loading = ref(true);
@@ -72,7 +70,10 @@ const handleRecordSaved = () => {
 
 const openEditModal = (record) => {
     console.log("Megnyitás szerkesztésre:", record);
-    openCreateModal();
+
+    selectedRecord.value = record;
+
+    isModalOpen.value = true;
 };
 
 onMounted(() => {
@@ -132,7 +133,7 @@ h2 {
 .stat-cards-grid {
     display: grid;
     /* Alapértelmezett beállítás asztali gépre */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 10px;
     margin-bottom: 10px;
 }
@@ -145,22 +146,22 @@ h2 {
         /* Vízszintes görgetés engedélyezése */
         display: flex; /* Váltunk Flexbox-ra a görgethetőséghez */
         overflow-x: auto; /* Vízszintes görgetés, ha túlcsordul */
-        overflow-y: hidden; 
-        
+        overflow-y: hidden;
+
         /* Megakadályozzuk, hogy a kártyák összemennek */
-        flex-wrap: nowrap; 
-        
+        flex-wrap: nowrap;
+
         /* Opcionális: Szélesebb margó a konténernek, hogy a görgetősáv ne zavarjon */
-        padding-bottom: 15px; 
+        padding-bottom: 15px;
     }
-    
+
     .stat-cards-grid > * {
         /* Minden kártya fix (vagy minimális) szélességet kap */
         flex-shrink: 0; /* Megakadályozza az összenyomódást */
         width: 155px; /* Példa szélesség */
         font-size: 0.8rem;
     }
-    
+
     /* Görgősáv elrejtése (opcionális, a letisztultabb megjelenésért) */
     .stat-cards-grid::-webkit-scrollbar {
         display: none;
@@ -182,7 +183,7 @@ h2 {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    min-height: 400px;
+    min-height: 600px;
     border: 1px solid wheat;
 }
 
@@ -191,17 +192,17 @@ h2 {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    
+
     /* 💡 1. LÉPÉS: Állítsd be a konténert Flex-konténerként */
     display: flex;
-    flex-direction: column; 
-    
+    flex-direction: column;
+
     /* 💡 2. LÉPÉS: Kötelező magasságot vagy maximális magasságot adunk (megegyezhet a chart-area magasságával) */
     /* Példa: max 450px magasság, utána vágódik. */
-    max-height: 400px; 
-    
+    max-height: 300px;
+
     /* Fontos, ha a belső elemek nagyobbak, mint a konténer. Ezt a SleepList.vue görgetősávja fogja használni! */
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 /* Reszponzivitás a fő tartalomra */

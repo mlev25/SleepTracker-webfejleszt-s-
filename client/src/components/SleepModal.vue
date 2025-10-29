@@ -1,7 +1,8 @@
 <template>
     <div v-if="isOpen" class="modal-overlay" @click.self="$emit('close')">
         <div class="modal-content">
-            <h3>Új alvás</h3>
+            <h3 v-if="!isEditMode">Új alvás</h3>
+            <h3 v-else>Alvás módosítása</h3>
 
             <form @submit.prevent="saveRecord" class="sleep-form">
                 <label for="date">Dátum:</label>
@@ -15,9 +16,27 @@
 
                 <label for="quality">Alvás minősége (1-5):</label>
                 <input type="number" id="quality" v-model.number="formData.sleepQuality" min="1" max="5" required>
+                <div v-if="isEditMode && selectedRecord && selectedRecord.sleepEvents && selectedRecord.sleepEvents.length" class="sleep-events-section">
+                    <h4>Alvási Fázisok (Részletek)</h4>
+                    <p class="summary">Teljes idő: {{ Math.floor(selectedRecord.totalSleepMinutes / 60) }} óra {{ selectedRecord.totalSleepMinutes % 60 }} perc</p>
+
+                    <ul class="events-list">
+                        <li v-for="(event, index) in selectedRecord.sleepEvents" :key="index">
+                            <span :class="['event-type', event.eventType.toLowerCase()]">
+                                {{ event.eventType }}
+                            </span>
+                             - {{ event.durationMinutes }} perc
+                        </li>
+                    </ul>
+                </div>
                 <div class="modal-actions">
-                <button type="submit" class="btn-primary">Rögzítés</button>
-                <button type="button" @click="$emit('close')" class="btn-secondary">Mégse</button>
+                    <button type="submit" class="btn-primary">
+                        {{ isEditMode ? 'Mentés' : 'Rögzítés' }}
+                    </button>
+                    <button v-if="isEditMode" type="button" @click="deleteRecord" class="btn-danger">
+                        Törlés
+                    </button>
+                    <button type="button" @click="$emit('close')" class="btn-secondary">Mégse</button>
                 </div>
             </form>
         </div>
@@ -45,7 +64,17 @@ const emptyForm = () => ({
 const formData = ref(emptyForm());
 const isEditMode = ref(false);
 
+const toLocalDatetime = (isoString) => {
+    if (!isoString) return '';
+    const date = new Date(isoString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
 
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
 
 
 watch(() => props.selectedRecord, (newRecord) => {
@@ -55,12 +84,11 @@ watch(() => props.selectedRecord, (newRecord) => {
         formData.value = {
             _id: newRecord._id,
             date: new Date(newRecord.date).toISOString().substring(0, 10),
-            bedtime: new Date(newRecord.bedtime).toISOString().substring(0, 16),
-            wakeupTime: new Date(newRecord.wakeupTime).toISOString().substring(0, 16),
+            bedtime: toLocalDatetime(newRecord.bedtime),
+            wakeupTime: toLocalDatetime(newRecord.wakeupTime),
             sleepQuality: newRecord.sleepQuality,
         };
     } else {
-        // Ha nincs rekord, vagy a HomeView null-t küldött, új felvitel mód
         isEditMode.value = false;
         formData.value = emptyForm();
     }
@@ -68,13 +96,45 @@ watch(() => props.selectedRecord, (newRecord) => {
 
 const saveRecord = async () => {
     try{
-        await sleepService.createNewSleepLog(formData.value);
+        if (isEditMode.value) {
+            console.log('A modositott alvasrekord: ',formData.value);
+            await sleepService.updateSleepLog(formData.value._id, formData.value);
+            alert('Alvás rekord sikeresen frissítve!');
+        } else {
+            await sleepService.createNewSleepLog(formData.value);
+            alert('Új alvás rekord sikeresen rögzítve!');
+        }
 
         emit('recordSaved');
         emit('close');
     } catch (error){
-        alert('Hiba tortent a rekord rogzitesekor');
-        console.error('Hiba tortent rekord letrehozasakor: ', error);
+        alert('Hiba történt a művelet során. Kérjük, ellenőrizze a konzolt.');
+        console.error('API hiba a rögzítés/frissítés során:', error);
+    }
+}
+
+const deleteRecord = async () => {
+    if (!confirm('Biztosan törölni szeretnéd ezt az alvásbejegyzést? Ez a művelet nem visszavonható.')) {
+        return;
+    }
+
+    try {
+        if (!formData.value._id) {
+            alert('Hiba: Nincs érvényes azonosító a törléshez.');
+            return;
+        }
+
+        await sleepService.deleteSleepLog(formData.value._id);
+
+        alert('Az alvás rekord sikeresen törölve.');
+
+        emit('recordSaved');
+        emit('close');
+
+    } catch (error) {
+        const errorMessage = error.response?.data?.message || 'Hiba történt a törlés során. Lásd a konzolt a részletekért.';
+        alert(errorMessage);
+        console.error('API hiba a törlés során:', error);
     }
 }
 </script>
@@ -99,4 +159,71 @@ h3 { margin-top: 0; color: #334d6e; margin-bottom: 20px; }
 .btn-primary:hover { background-color: #0056b3; }
 .btn-secondary { background-color: #f0f0f0; color: #333; }
 .btn-secondary:hover { background-color: #e0e0e0; }
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between; /* Elválasztja a Törlés gombot a Mégse/Mentés gomboktól */
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* ÚJ GOMB STÍLUS: Törlés */
+.btn-danger {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    background-color: #dc3545; /* Piros szín */
+    color: white;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* ÚJ SZEKCIÓ STÍLUS: Alvás Események */
+.sleep-events-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f7f9fc;
+    border-radius: 8px;
+    border-left: 3px solid #007bff;
+}
+
+.summary {
+    font-weight: bold;
+    color: #334d6e;
+    margin-bottom: 10px;
+}
+
+.events-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    max-height: 150px;
+    overflow-y: auto; /* Görgetés, ha túl sok az esemény */
+}
+
+.events-list li {
+    padding: 5px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 0.9em;
+}
+
+.event-type {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    min-width: 50px;
+    text-align: center;
+    text-transform: uppercase;
+}
+/* Színkódok az eseményekhez (könnyebb vizuális követés) */
+.light { background-color: #4dc2f5; }
+.deep { background-color: #215e98; }
+.rem { background-color: #9b59b6; }
+.wake { background-color: #e74c3c; }
 </style>
