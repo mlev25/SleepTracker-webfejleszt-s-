@@ -43,12 +43,28 @@ const emptyForm = () => ({
 });
 
 const formData = ref(emptyForm());
+const isEditMode = ref(false);
 
-watch(() => props.isOpen, (newValue) => {
-    if(newValue){
+
+
+
+watch(() => props.selectedRecord, (newRecord) => {
+    if (newRecord && newRecord._id) {
+        isEditMode.value = true;
+
+        formData.value = {
+            _id: newRecord._id,
+            date: new Date(newRecord.date).toISOString().substring(0, 10),
+            bedtime: new Date(newRecord.bedtime).toISOString().substring(0, 16),
+            wakeupTime: new Date(newRecord.wakeupTime).toISOString().substring(0, 16),
+            sleepQuality: newRecord.sleepQuality,
+        };
+    } else {
+        // Ha nincs rekord, vagy a HomeView null-t küldött, új felvitel mód
+        isEditMode.value = false;
         formData.value = emptyForm();
     }
-});
+}, { immediate: true });
 
 const saveRecord = async () => {
     try{

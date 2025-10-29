@@ -72,6 +72,7 @@ const handleRecordSaved = () => {
 
 const openEditModal = (record) => {
     console.log("Megnyitás szerkesztésre:", record);
+    openCreateModal();
 };
 
 onMounted(() => {
