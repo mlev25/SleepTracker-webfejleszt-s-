@@ -11,10 +11,13 @@
 
     <section class="main-content-grid">
       <div class="main-chart-area">
-        <h3>Alvásnapló diagram</h3>
-        <p v-if="loading">Adatok betöltése...</p>
-        <p v-else-if="sleepRecords.length === 0">Nincs betöltendő adat</p>
-      </div>
+        <h3 class="chart-title">Alvásmennyiség (Utolsó 7 nap)</h3>
+
+        <p v-if="loading" class="chart-loading">Adatok betöltése...</p>
+        <div v-else class="chart-wrapper">
+            <SleepChart :sleepRecords="sleepRecords" />
+        </div>
+    </div>
 
       <div class="main-list-area">
 
@@ -79,8 +82,9 @@ import dreamService from '@/services/dreamService';
 import SleepList from '@/components/SleepList.vue';
 import StatCard from '@/components/StatCard.vue';
 import SleepModal from '@/components/SleepModal.vue';
-import DreamList from '@/views/DreamList.vue';
+import DreamList from '@/components/DreamList.vue';
 import DreamModal from '@/components/DreamModal.vue';
+import SleepChart from '@/components/SleepChart.vue';
 
 const authStore = useAuthStore();
 
@@ -255,6 +259,8 @@ h2 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     min-height: 600px;
     border: 1px solid wheat;
+    display: flex;
+    flex-direction: column;
 }
 
 .main-list-area {
@@ -343,5 +349,14 @@ h2 {
     .main-content-grid {
         grid-template-columns: 1fr;
     }
+}
+.chart-title {
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+.chart-wrapper {
+    flex-grow: 1;
 }
 </style>
