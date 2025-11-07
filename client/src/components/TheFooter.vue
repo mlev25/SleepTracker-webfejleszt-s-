@@ -6,16 +6,15 @@
 </template>
 
 <script setup>
-// Nincs szükség scriptre, egyszerű statikus komponens
 </script>
 
 <style scoped>
 .app-footer {
   text-align: center;
   padding: 5px;
-  background-color: #334d6e; /* Ugyanaz a szín, mint a header */
+  background-color: #334d6e;
   color: #c4d2e5;
-  position: fixed; /* Rögzítés az oldal aljára */
+  position: fixed;
   bottom: 0;
   width: 100%;
   font-size: 0.85em;

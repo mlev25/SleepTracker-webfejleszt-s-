@@ -9,7 +9,6 @@ export const useAuthStore = defineStore('authStore', {
 
   actions: {
     setAuth(payload) {
-        // 2. Szétválasztjuk a user adatokat a tokentől a mentéshez
         const user = {
             _id: payload._id,
             email: payload.email,
@@ -19,12 +18,11 @@ export const useAuthStore = defineStore('authStore', {
         };
         const token = payload.token;
 
-        // 3. Mentés a Store-ba és a Local Storage-ba
         this.user = user;
         this.token = token;
         this.isLoggedIn = true;
 
-        localStorage.setItem('user', JSON.stringify(user)); // Itt már a tiszta user objektumot mentjük
+        localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('token', token);
     },
 

@@ -129,7 +129,7 @@ button:disabled {
 }
 
 .auth-link {
-    margin-top: 25px; /* Margin-top a Bootstrap 'mt-3' helyett */
+    margin-top: 25px;
     text-align: center;
     font-size: 0.9em;
     color: #666;
@@ -144,10 +144,10 @@ button:disabled {
 }
 @media (max-width: 480px) {
     .login-container {
-        max-width: 100%; /* Kitölti a teljes szélességet */
-        margin: 20px 10px; /* Kisebb margó oldalt */
+        max-width: 100%;
+        margin: 20px 10px;
         padding: 20px;
-        box-shadow: none; /* Mobilon nem kellenek árnyékok */
+        box-shadow: none;
         border-radius: 0;
     }
 }

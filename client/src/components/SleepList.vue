@@ -39,7 +39,6 @@ defineProps({
 const emit = defineEmits(['editRecord']);
 
 const formatDate = (dateString) => {
-  // A rekord.date valószínűleg ISO string
   if (!dateString) return 'Ismeretlen dátum';
   return new Date(dateString).toLocaleDateString('hu-HU', { month: 'short', day: 'numeric', year: 'numeric' });
 }
@@ -95,14 +94,12 @@ const showDetails = (record) => {
     border-bottom: 1px solid #f0f0f0;
 }
 
-/* 💡 A GÖRGETHETŐ KONTÉNER */
 .sleep-entries-scroll {
-    flex-grow: 1; /* Kitölti a rendelkezésre álló helyet a gomb alatt */
-    overflow-y: auto; /* Ez biztosítja a függőleges görgetést */
-    padding-right: 10px; /* Hely a görgetősávnak */
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
-/* Egyedi listaelem stílusa */
 .list-item {
     display: flex;
     justify-content: space-between;

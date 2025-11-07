@@ -49,13 +49,12 @@ const handleLogoutAndClose = () => {
 </script>
 
 <style scoped>
-/* A CSS stílusokat áthelyezzük ide az App.vue globális stílusai közül */
 .main-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-  background-color: #334d6e; /* Sötétkék háttér */
+  background-color: #334d6e;
   color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -111,7 +110,7 @@ const handleLogoutAndClose = () => {
 }
 
 .hamburger-btn {
-    display: none; /* Alapértelmezetten elrejtve, csak mobilon látszik */
+    display: none;
     background: none;
     border: none;
     cursor: pointer;
@@ -148,20 +147,18 @@ const handleLogoutAndClose = () => {
 
 @media (max-width: 768px) {
     .main-nav {
-        flex-direction: row; /* Visszaállítjuk a sorba */
-        justify-content: space-between; /* A logo és a gomb szétválasztása */
+        flex-direction: row;
+        justify-content: space-between;
     }
 
-    /* Megjelenítjük a hamburgert */
     .hamburger-btn {
         display: block;
     }
 
-    /* Elrejtjük a linkeket alapértelmezetten */
     .nav-links {
         display: none;
         position: absolute;
-        top: 60px; /* A header magassága alá igazítjuk */
+        top: 60px;
         left: 0;
         right: 0;
         background-color: #3287fd;
@@ -170,7 +167,6 @@ const handleLogoutAndClose = () => {
         padding-bottom: 10px;
     }
 
-    /* 💡 Megjelenítés, ha nyitva van */
     .nav-links.is-open {
         display: flex;
     }
@@ -182,7 +178,6 @@ const handleLogoutAndClose = () => {
         text-align: left;
     }
 
-    /* A Logout gomb átveszi a Nav-item stílust mobilon */
     .nav-item.logout-btn {
         margin: 5px 20px;
     }

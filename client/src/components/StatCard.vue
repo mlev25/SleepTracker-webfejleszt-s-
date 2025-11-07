@@ -58,8 +58,8 @@ defineEmits(['click']);
 
 .stat-card.is-action {
     cursor: pointer;
-    background-color: #d8f5d8; /* Más szín, hogy kitűnjön */
-    border-left: 5px solid #28a745; /* Zöld akció jelzés */
+    background-color: #d8f5d8;
+    border-left: 5px solid #28a745;
     transition: background-color 0.2s, transform 0.1s;
 }
 

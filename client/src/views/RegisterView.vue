@@ -40,11 +40,10 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import authService from '@/services/authService'; // ⬅️ A regisztrációs hívás
+import authService from '@/services/authService';
 
 const router = useRouter();
 
-// 1. REAKTÍV ÁLLAPOTOK
 const email = ref('');
 const password = ref('');
 const name = ref('');
@@ -54,9 +53,6 @@ const isLoading = ref(false);
 const error = ref(null);
 
 
-/**
- * Kezeli a regisztrációs kérést a backend felé
- */
 const handleRegister = async () => {
   isLoading.value = true;
   error.value = null;
@@ -69,16 +65,12 @@ const handleRegister = async () => {
       preferredSleepTime: prefSleepTime.value
     };
 
-    // 2. ASZINKRON API HÍVÁS (register helyett login)
-    // A register action a backendben egyben be is jelentkeztet minket
+
     await authService.register(userData);
 
-    // 3. SIKER: Átirányítás a főoldalra
     router.push('/');
   } catch (err) {
-    // 4. HIBA KEZELÉS
     console.error('Register Hiba:', err);
-    // Hibaüzenet, pl. ha az email cím már foglalt
     error.value = err.response?.data?.message || 'Hiba történt a regisztráció során.';
   } finally {
     isLoading.value = false;
@@ -87,9 +79,6 @@ const handleRegister = async () => {
 </script>
 
 <style scoped>
-/*
- * Ugyanazt a tiszta CSS-t használjuk a konzisztencia érdekében
- */
 .register-container {
     max-width: 400px;
     margin: 50px auto;
@@ -173,10 +162,10 @@ button:disabled {
 }
 @media (max-width: 480px) {
     .register-container {
-        max-width: 100%; /* Kitölti a teljes szélességet */
-        margin: 20px 10px; /* Kisebb margó oldalt */
+        max-width: 100%;
+        margin: 20px 10px;
         padding: 20px;
-        box-shadow: none; /* Mobilon nem kellenek árnyékok */
+        box-shadow: none;
         border-radius: 0;
     }
 }

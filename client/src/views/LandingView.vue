@@ -1,6 +1,6 @@
 <template>
   <div class="landing-container">
-    <h1>Üdvözöljük az Alvásnaplóban! 😴</h1>
+    <h1>Üdvözöljük az Alvásnaplóban</h1>
     <p class="tagline">Kövesse nyomon alvási szokásait, javítsa életminőségét, és ébredjen frissebben minden reggel.</p>
 
     <div class="features-grid">
@@ -40,7 +40,7 @@
 .landing-container {
     text-align: center;
     padding: 60px 20px;
-    max-width: 1100px; /* Szélesebb konténer a 3 oszlop miatt */
+    max-width: 1100px;
     margin: 0 auto;
 }
 h1 {
@@ -54,27 +54,26 @@ h1 {
     margin-bottom: 40px;
 }
 
-/* --- 3 Oszlopos Grid Stílusok --- */
 .features-grid {
     display: flex;
     justify-content: space-between;
-    gap: 30px; /* Térköz az oszlopok között */
+    gap: 30px;
     margin-bottom: 50px;
 }
 
 .feature-box {
-    flex: 1; /* Egyenlő szélesség a 3 oszlopnak */
+    flex: 1;
     padding: 30px;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     text-align: center;
-    border-top: 5px solid #007bff; /* Kiemelő vonal felül */
+    border-top: 5px solid #007bff;
     transition: transform 0.5s;
 }
 
 .feature-box:hover {
-    transform: translateY(-10px); /* Enyhe lebegő hatás */
+    transform: translateY(-10px);
 }
 
 .icon {
@@ -96,7 +95,6 @@ h1 {
     line-height: 1.6;
 }
 
-/* --- CTA Rész (A korábbi stílusok) --- */
 .cta-section {
     margin-top: 40px;
     padding: 30px;
@@ -136,12 +134,11 @@ h1 {
 
 @media (max-width: 900px) {
     .features-grid {
-        flex-wrap: wrap; /* A dobozok törnek a következő sorba */
+        flex-wrap: wrap;
         justify-content: center;
     }
 
     .feature-box {
-        /* Tableten 2 oszlop: */
         flex: 1 1 calc(50% - 30px);
         margin-bottom: 20px;
     }
@@ -149,7 +146,6 @@ h1 {
 
 @media (max-width: 600px) {
     .feature-box {
-        /* Mobilon 1 oszlop: */
         flex: 1 1 100%;
     }
 
