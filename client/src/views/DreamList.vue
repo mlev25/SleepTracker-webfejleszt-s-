@@ -26,7 +26,7 @@
                             {{ tag }}
                         </span>
                     </div>
-                    <span class="edit-icon">✏️ Részletek / Szerkesztés</span>
+                    <span class="edit-icon">Részletek / Szerkesztés</span>
                 </div>
             </div>
         </div>
@@ -36,7 +36,6 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue';
 
-// Ez a komponens megkapja az összes álomrekordot a HomeView-tól
 defineProps({
     records: {
         type: Array,
