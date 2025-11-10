@@ -1,7 +1,7 @@
 <template>
   <div class="landing-container">
-    <h1>Üdvözöljük az Alvásnaplóban</h1>
-    <p class="tagline">Kövesse nyomon alvási szokásait, javítsa életminőségét, és ébredjen frissebben minden reggel.</p>
+    <h1>Üdvözöljük!</h1>
+    <p class="tagline">Kövesse nyomon alvási szokásait, jegyezze fel álmait, javítsa életminőségét, és ébredjen frissebben minden reggel.</p>
 
     <div class="features-grid">
 
@@ -13,14 +13,14 @@
 
       <div class="feature-box">
         <i class="icon">📊</i>
-        <h3>Hasznos Diagramok</h3>
-        <p>Elemezz! Hozzáférhetsz hasznos diagramokhoz, hogy jobban megértsd a pihenési mintáidat.</p>
+        <h3>Hasznos Diagram</h3>
+        <p>Elemezz! Biztosított egy alvásdiagram, hogy jobban megértsd a pihenési mintáidat.</p>
       </div>
 
       <div class="feature-box">
-        <i class="icon">🎯</i>
-        <h3>Célok Kitűzése</h3>
-        <p>Rendszerezz! Tűzz ki személyes alvási célokat, és kövesd, mennyire sikerül tartani a kitűzött ritmust.</p>
+        <i class="icon">💭</i>
+        <h3>Álmok feljegyzése</h3>
+        <p>Álmodj! Jegyezd fel álmaidat, találj összefüggést az alvásaid minősége és az álmaid tartalma között!</p>
       </div>
 
     </div>

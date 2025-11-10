@@ -16,7 +16,7 @@ defineProps({
         required: true
     },
     value: {
-        type: [String, Number],
+        type: [String, Number, null],
         required: true
     },
     action: {

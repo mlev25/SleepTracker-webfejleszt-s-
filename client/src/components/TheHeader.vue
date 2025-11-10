@@ -1,6 +1,6 @@
 <template>
   <nav class="main-nav">
-    <router-link to="/" class="nav-logo">Alvásnapló</router-link>
+    <router-link to="/" class="nav-logo">Alvás- és Álomnapló</router-link>
 
     <button class="hamburger-btn" @click="toggleMenu" aria-label="Menü nyitása">
         <span :class="{ 'is-active': isOpen }"></span>
