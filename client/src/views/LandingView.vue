@@ -6,19 +6,19 @@
     <div class="features-grid">
 
       <div class="feature-box">
-        <i class="icon">📈</i>
+        <span class="icon">📈</span>
         <h3>Könnyed Felhasználás</h3>
         <p>Lásd a trendeket! Kövesd nyomon alvásod minőségét, mélységét egyszerűen, érthetően.</p>
       </div>
 
       <div class="feature-box">
-        <i class="icon">📊</i>
+        <span class="icon">📊</span>
         <h3>Hasznos Diagram</h3>
         <p>Elemezz! Biztosított egy alvásdiagram, hogy jobban megértsd a pihenési mintáidat.</p>
       </div>
 
       <div class="feature-box">
-        <i class="icon">💭</i>
+        <span class="icon">💭</span>
         <h3>Álmok feljegyzése</h3>
         <p>Álmodj! Jegyezd fel álmaidat, találj összefüggést az alvásaid minősége és az álmaid tartalma között!</p>
       </div>

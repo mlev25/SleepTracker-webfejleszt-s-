@@ -13,9 +13,7 @@ const calculateAverageSleepTime = (records) => {
     const totalMinutes = validRecords.reduce((sum, record) => sum + record.totalSleepMinutes, 0);
     const averageMinutes = Math.round(totalMinutes / validRecords.length);
 
-    const hour = Math.floor(averageMinutes/60);
-    const mins = averageMinutes % 60;
-    return `${hour}:${mins.toString().padStart(2, '0')}`;
+    return averageMinutes;
 };
 
 const calculateAverageSleepQuality = (records) => {

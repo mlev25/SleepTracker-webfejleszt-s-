@@ -2,11 +2,11 @@
   <div class="dashboard-container">
 
     <section class="stat-cards-grid">
-      <StatCard title="Átlagos alvásidő:&nbsp" :value="sleepService.calculateAverageSleepTime(sleepRecords)" />
+      <StatCard title="Átlagos alvásidő:&nbsp" :value="averageSleepTime" :warning="isAvgLessThanPref"/>
       <StatCard title="Beállított cél:&nbsp" :value="authStore.getPrefSleepTime" />
       <StatCard title="Átlagos alvásminőség:&nbsp" :value="sleepService.calculateAverageSleepQuality(sleepRecords)" />
 
-      <StatCard title="Felvitt álmok száma: " :value=dreamCount></StatCard>
+      <StatCard title="Felvitt álmok száma:&nbsp" :value=dreamCount></StatCard>
     </section>
 
     <section class="main-content-grid">
@@ -104,11 +104,15 @@ const selectedDreamRecord = ref(null);
 const averageSleepTime = ref('N/A');
 const averageSleepQuality = ref('N/A');
 
+const isAvgLessThanPref = ref(false);
+
+
+
 const formatMinutesToHours = (totalMinutes) => {
     if (totalMinutes === 0) return '0h 0m';
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
-    return `${hours}h ${minutes}m`;
+    return `${hours}:${minutes}`;
 };
 
 
@@ -126,6 +130,13 @@ const loadAllData = async () => {
 
         dreamRecords.value = dreamDataResponse.data;
         dreamCount.value = dreamDataResponse.count;
+
+        if (averageSleepTime.value && authStore.getPrefSleepTime) {
+            const calculatedAvg = sleepService.calculateAverageSleepTime(sleepData);
+            const prefParts = authStore.getPrefSleepTime.split(':');
+            const prefTotalMinutes = parseInt(prefParts[0]) * 60 + parseInt(prefParts[1]);
+            isAvgLessThanPref.value = calculatedAvg < prefTotalMinutes;
+        }
 
     } catch (error){
         console.error('Hiba az adatok (alvás vagy álom) lekérdezésekor:', error);
@@ -257,7 +268,7 @@ h2 {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    min-height: 600px;
+    min-height: 500px;
     border: 1px solid wheat;
     display: flex;
     flex-direction: column;
@@ -274,12 +285,6 @@ h2 {
     max-height: 300px;
 
     overflow: hidden;
-}
-
-@media (max-width: 1150px) {
-    .main-content-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 .main-list-area {
@@ -349,7 +354,14 @@ h2 {
     .main-content-grid {
         grid-template-columns: 1fr;
     }
+
+    .main-chart-area {
+        overflow-x: hidden;
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
+
 .chart-title {
     margin-bottom: 15px;
     color: #333;
@@ -358,5 +370,8 @@ h2 {
 
 .chart-wrapper {
     flex-grow: 1;
+}
+.less{
+  background-color: red;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div :class="['stat-card', { 'is-action': action }]" @click="action ? $emit('click') : null">
+    <div :class="['stat-card', { 'not-warning': title.includes('Átlagos alvásidő'), 'is-warning': warning }]">
         <div class="card-content">
             <p class="card-title">{{ title }}</p>
             <p class="card-val">{{ value }}</p>
@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import {defineEmits, defineProps } from 'vue';
+import {defineProps } from 'vue';
 
 defineProps({
     title: {
@@ -19,13 +19,12 @@ defineProps({
         type: [String, Number, null],
         required: true
     },
-    action: {
+    warning: {
         type: Boolean,
         default: false
     }
 });
 
-defineEmits(['click']);
 </script>
 
 <style scoped>
@@ -56,17 +55,13 @@ defineEmits(['click']);
     font-weight: bold;
 }
 
-.stat-card.is-action {
-    cursor: pointer;
-    background-color: #d8f5d8;
-    border-left: 5px solid #28a745;
-    transition: background-color 0.2s, transform 0.1s;
+.is-warning {
+    background-color: #fe8665 !important;
 }
 
-.stat-card.is-action:hover {
-    background-color: #c9e6c9;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.not-warning {
+    background-color: greenyellow;
 }
+
 
 </style>
