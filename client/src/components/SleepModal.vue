@@ -36,7 +36,7 @@
                     <button v-if="isEditMode" type="button" @click="deleteRecord" class="btn-danger">
                         Törlés
                     </button>
-                    <button type="button" @click="$emit('close')" class="btn-secondary">Mégse</button>
+                    <button type="button" @click="$emit('close')" class="btn-secondary">Vissza</button>
                 </div>
             </form>
         </div>
@@ -114,7 +114,7 @@ const saveRecord = async () => {
 }
 
 const deleteRecord = async () => {
-    if (!confirm('Biztosan törölni szeretnéd ezt az alvásbejegyzést? Ez a művelet nem visszavonható.')) {
+    if (!confirm('Biztosan törölni szeretnéd ezt az alvásbejegyzést, és ezáltal a hozzá tartozó álmokat is? Ez a művelet nem visszavonható.')) {
         return;
     }
 
@@ -126,7 +126,7 @@ const deleteRecord = async () => {
 
         await sleepService.deleteSleepLog(formData.value._id);
 
-        alert('Az alvás rekord sikeresen törölve.');
+        alert('Figyelem! Az alvás rekord sikeresen törölve a hozzá tartozó álom rekordokkal együtt!');
 
         emit('recordSaved');
         emit('close');
@@ -146,9 +146,10 @@ const deleteRecord = async () => {
     align-items: center; z-index: 1000;
 }
 .modal-content {
-    background: white; padding: 30px; border-radius: 10px;
-    width: 90%; max-width: 400px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background: rgb(240, 236, 236); padding: 17px; border-radius: 10px;
+    width: 90%; max-width: 500px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
+
 h3 {
   margin-top: 0;
   color: #334d6e;
@@ -156,7 +157,6 @@ h3 {
 }
 .sleep-form label {
   display: block;
-  margin-top: 10px;
   margin-bottom: 5px;
   font-weight: bold;
   color: #555;
@@ -178,8 +178,8 @@ h3 {
 .btn-primary, .btn-secondary { padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: background-color 0.2s; }
 .btn-primary { background-color: #007bff; color: white; }
 .btn-primary:hover { background-color: #0056b3; }
-.btn-secondary { background-color: #f0f0f0; color: #333; }
-.btn-secondary:hover { background-color: #e0e0e0; }
+.btn-secondary { background-color: #40ea29; color: #ffffff; }
+.btn-secondary:hover { background-color: #a2f9b7; }
 
 .modal-actions {
     display: flex;
@@ -203,11 +203,10 @@ h3 {
 }
 
 .sleep-events-section {
-    margin-top: 20px;
     padding: 15px;
     background-color: #f7f9fc;
-    border-radius: 8px;
-    border-left: 3px solid #007bff;
+    border-radius: 0.5rem;
+    border: 3px solid #d1e7fd;
 }
 
 .summary {

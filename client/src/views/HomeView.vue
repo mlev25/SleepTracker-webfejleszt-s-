@@ -274,18 +274,7 @@ h2 {
     flex-direction: column;
 }
 
-.main-list-area {
-    background-color: wheat;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
-    display: flex;
-    flex-direction: column;
-    max-height: 300px;
-
-    overflow: hidden;
-}
 
 .main-list-area {
     background-color: wheat;

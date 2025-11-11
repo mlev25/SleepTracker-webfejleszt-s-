@@ -51,6 +51,28 @@ const SleepSessionSchema = new mongoose.Schema({
     sleepEvents: [SleepEventSchema] //beagyazzuk az esemeny semat
 }, { timestamps: true });
 
+SleepSessionSchema.pre('findOneAndDelete', async function (next) {
+    try {
+        const query = this.getQuery();
+
+        const session = await this.model.findOne(query);
+
+        if (session) {
+            const DreamLog = mongoose.model('DreamLog');
+
+            await DreamLog.deleteMany({ sleepSessionId: session._id });
+
+            console.log(`Kaszkádolt törlés: A ${session._id} SleepSession-höz tartozó álmok törölve.`);
+        }
+
+        next();
+    } catch (error) {
+        console.error('Hiba történt a kaszkádolt törlés során:', error);
+        next(error);
+    }
+});
+
+
 SleepSessionSchema.index({ user: 1, date: 1 }, { unique: true });
 const SleepSession = mongoose.model('SleepSession', SleepSessionSchema);
 
