@@ -65,10 +65,10 @@ const handleLogin = async () => {
     max-width: 400px;
     margin: 50px auto;
     padding: 30px;
-    border: 1px solid #dcdcdc;
+    border: 1px solid #a78888;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
+    background-color: #b8ecff;
 }
 
 h2 {
@@ -101,7 +101,7 @@ input {
     width: 100%;
     padding: 12px;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: 1px solid #e7e7e7;
     border-radius: 6px;
     font-size: 16px;
 }

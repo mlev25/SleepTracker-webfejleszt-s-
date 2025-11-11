@@ -158,13 +158,14 @@ const handleLogoutAndClose = () => {
     .nav-links {
         display: none;
         position: absolute;
-        top: 60px;
+        top: 65px;
         left: 0;
         right: 0;
-        background-color: #3287fd;
+        background-color: #6b96ce;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         flex-direction: column;
         padding-bottom: 10px;
+        opacity: 90%;
     }
 
     .nav-links.is-open {
