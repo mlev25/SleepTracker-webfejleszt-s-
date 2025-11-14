@@ -38,4 +38,22 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+userSchema.pre('findOneAndDelete', async function(next) {
+    try {
+        const query = this.getQuery();
+        const user = await this.model.findOne(query);
+
+        if (user) {
+            const SleepSession = mongoose.model('SleepSession');
+            const DreamLog = mongoose.model('DreamLog');
+            
+            await SleepSession.deleteMany({ user: user._id });
+            await DreamLog.deleteMany({ user: user._id });
+        }
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
+
 module.exports = mongoose.model('User', userSchema);

@@ -1,5 +1,5 @@
 const protectAdmin = (req, res, nesxt) => {
-      if (req.user && req.user.role === 'admin') {
+      if (req.user && req.user.role === 'ADMIN') {
             nesxt();
       }else {
             res.status(403);
