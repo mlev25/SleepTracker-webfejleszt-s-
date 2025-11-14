@@ -12,7 +12,8 @@ app.use(express.json());
 //Import routes
 const authRoutes = require('./routes/authRoutes');
 const sleepRoutes = require('./routes/sleepRoutes');
-const dreamRoutes = require('./routes/dreamRoutes')
+const dreamRoutes = require('./routes/dreamRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const connectDB = async () => {
     try {
@@ -40,6 +41,7 @@ mongoose.connection.on('connected', () => {
 app.use('/api/auth', authRoutes);
 app.use('/api/sleepsessions', sleepRoutes);
 app.use('/api/dreamlogs', dreamRoutes);
+app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
     res.send('API is running...');
