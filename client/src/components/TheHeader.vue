@@ -14,6 +14,7 @@
       </template>
 
       <template v-else>
+        <router-link to="/admin" v-if="authStore.isAdmin" class="admin-link" @click="closeMenu">Admin Panel</router-link>
         <router-link to="/home" class="nav-item" @click="closeMenu">Home</router-link>
         <span class="welcome-message">Üdv, {{ authStore.getUserName }}</span>
         <button @click="handleLogoutAndClose" class="nav-item logout-btn">Kijelentkezés</button>
@@ -76,6 +77,21 @@ const handleLogoutAndClose = () => {
 .nav-links {
   display: flex;
   align-items: center;
+}
+
+.admin-link {
+  margin-left: 20px;
+  color: rgb(255, 58, 58);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  font-size: 0.95em;
+  font-weight: bold;
+}
+
+.admin-link:hover {
+  background-color: #a82f2f;
 }
 
 .nav-item, .welcome-message {
@@ -182,5 +198,6 @@ const handleLogoutAndClose = () => {
     .nav-item.logout-btn {
         margin: 5px 20px;
     }
+
 }
 </style>

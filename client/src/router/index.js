@@ -38,7 +38,7 @@ const router = createRouter({
       path: '/admin',
       name: 'admin',
       component: AdminView,
-      meta: { requiresAuth: true , requiresAdmin: true }
+      meta: { requiresAuth: true, requiresAdmin: true }
     }
   ],
 });
@@ -51,7 +51,8 @@ router.beforeEach((to, from, next) => {
     next({ name: 'login' });
   } else if (to.meta.requiresGuest && isAuthenticated) {
     next('/home');
-  } else if (to.meta.requiresAdmin && authStore.user?.role !== 'admin') {
+  } else if (to.meta.requiresAdmin && authStore.isAdmin === false) {
+    //console.log('A felhasznalo jogosultsaga '+ authStore.user?.role);
     next('/home');
   }
   else {

@@ -42,6 +42,7 @@ export const useAuthStore = defineStore('authStore', {
     getUserName: (state) => state.user?.name || 'Vendeg',
     getUserEmail: (state) => state.user?.email || null,
     getUser: (state) => state.user,
-    getPrefSleepTime: (state) => state.user?.prefSleepTime || null
+    getPrefSleepTime: (state) => state.user?.prefSleepTime || null,
+    isAdmin: (state) => state.user?.role === 'ADMIN',
   }
 });
