@@ -135,7 +135,8 @@ const loadAllData = async () => {
             const calculatedAvg = sleepService.calculateAverageSleepTime(sleepData);
             const prefParts = authStore.getPrefSleepTime.split(':');
             const prefTotalMinutes = parseInt(prefParts[0]) * 60 + parseInt(prefParts[1]);
-            isAvgLessThanPref.value = calculatedAvg < prefTotalMinutes;
+            isAvgLessThanPref.value = calculatedAvg < prefTotalMinutes || !Number.isNaN(calculatedAvg);
+            //console.log('Avg Sleep Time (min):', calculatedAvg, 'Pref Sleep Time (min):', prefTotalMinutes, 'isAvgLessThanPref:', isAvgLessThanPref.value);
         }
 
     } catch (error){

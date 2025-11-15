@@ -5,6 +5,7 @@ import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import LandingView from '@/views/LandingView.vue'
+import AdminView from '@/views/AdminView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,12 @@ const router = createRouter({
       name: 'register',
       component: RegisterView,
       meta: { requiresGuest: true }
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminView,
+      meta: { requiresAuth: true , requiresAdmin: true }
     }
   ],
 });
@@ -44,7 +51,10 @@ router.beforeEach((to, from, next) => {
     next({ name: 'login' });
   } else if (to.meta.requiresGuest && isAuthenticated) {
     next('/home');
-  } else {
+  } else if (to.meta.requiresAdmin && authStore.user?.role !== 'admin') {
+    next('/home');
+  }
+  else {
     next();
   }
 

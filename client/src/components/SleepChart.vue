@@ -1,12 +1,12 @@
 <template>
     <div class="chart-container">
         <Bar
-            v-if="chartData.datasets[0].data.length"
+            v-if="chartData.datasets[0].data.length >= 7"
             :data="chartData"
             :options="chartOptions"
         />
         <p v-else class="no-data">
-            Nincs elegendő adat (legalább 7 nap) a heti trend megjelenítéséhez.
+            Nincs elegendő adat (legalább 7 alvasrekord) a heti trend megjelenítéséhez.
         </p>
     </div>
 </template>
