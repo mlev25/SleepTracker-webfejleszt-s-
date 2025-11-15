@@ -10,7 +10,7 @@
       <ul v-else class="user-list">
         <li v-for="user in users" :key="user._id" class="user-item">
           <div class="user-info">
-              <strong>{{ user.name }}</strong> ({{ user.email }})
+              <strong>{{ user.name }}</strong>
               <span :class="['user-role', { 'is-admin': user.role === 'ADMIN' }]">
                   {{ user.role.toUpperCase() }}
               </span>
@@ -123,7 +123,7 @@ onMounted(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 5px 5px;
     margin-bottom: 12px;
     background-color: white;
     border: 1px solid #dee2e6;
@@ -138,7 +138,6 @@ onMounted(() => {
 }
 
 .user-info strong {
-    margin-right: 10px;
     color: #007bff;
 }
 
