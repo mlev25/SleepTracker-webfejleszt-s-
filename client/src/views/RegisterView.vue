@@ -22,7 +22,8 @@
 
       <div>
         <label for="prefSleepTime">Alvási cél (óra:perc)</label>
-        <input type="text" id="prefSleepTime" v-model="prefSleepTime" required>
+        <input type="text" id="prefSleepTime" v-model="prefSleepTime" required placeholder="pl. 8:30">
+        <p v-if="formError" class="validation-error">{{ formError }}</p>
       </div>
 
       <button type="submit" :disabled="isLoading">
@@ -48,14 +49,32 @@ const email = ref('');
 const password = ref('');
 const name = ref('');
 const prefSleepTime = ref('');
+const timeRegex = /^(?:[0-9]|1\d|2[0-3]):[0-5]\d$/;
 
 const isLoading = ref(false);
 const error = ref(null);
+const formError = ref('');
 
+const validateTimeFormat = () => {
+
+    if (!timeRegex.test(prefSleepTime.value) || !prefSleepTime.value) {
+        formError.value = 'Helytelen formátum! A preferált alvásidő formátuma pl. 7:30 kell legyen.';
+        return false;
+    }
+
+    formError.value = '';
+    return true;
+}
 
 const handleRegister = async () => {
+  formError.value = '';
   isLoading.value = true;
   error.value = null;
+
+  if (!validateTimeFormat()) {
+      isLoading.value = false;
+      return;
+  }
 
   try {
     const userData = {
@@ -168,5 +187,16 @@ button:disabled {
         box-shadow: none;
         border-radius: 0;
     }
+}
+
+.validation-error {
+    color: #dc3545;
+    background-color: #fff0f0;
+    padding: 8px 10px;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-size: 0.9em;
+    border: 1px solid #f5c6cb;
 }
 </style>

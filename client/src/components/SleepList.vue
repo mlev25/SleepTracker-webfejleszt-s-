@@ -129,11 +129,14 @@ const showDetails = (record) => {
     flex-grow: 1;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 0 15px;
 }
 
 .item-duration {
     font-weight: 600;
+    padding-top: 2px;
+    color: #5985b8;
 }
 
 .edit-icon {
